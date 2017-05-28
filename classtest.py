@@ -41,10 +41,17 @@ class Fib(object):
                 step=0
             a,b=1,1
             L=[]
-            for x in range(stop):
-                if x>=start and (x-start)%(step+1)==0:
-                    L.append(a)
-                a,b=b,a+b
-
+            if step>=0:
+                for x in range(stop):
+                    if x>=start and (x-start)%(step+1)==0:
+                        L.append(a)
+                    a,b=b,a+b
+            else:
+                for x in range(start):
+                    if x in list(range(stop,start+1))[::-step]:
+                        L.append(a)
+                    a,b=b,a+b
+                L=L[::-1]
             return L
+            
     
