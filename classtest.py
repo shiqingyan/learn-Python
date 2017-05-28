@@ -1,6 +1,10 @@
 class Student(object):
     def __init__(self,name):
-        self.__name=name
+        self.name=name
+    def __getattr__(self,attr):
+        if attr=='score':
+            return 99
+##*******************************************
         
     def __str__(self):
         return 'Student object (name: %s)' % self.__name
