@@ -2,10 +2,12 @@
 
 from atexit import register
 from re import compile
-from threading import Thread
+from threading import Thread, Lock
 from time import ctime
 from urllib.request import urlopen as uopen
 
+
+lock = Lock()
 REGEX = compile('#([\d,]+) in Books ')
 AMZN = 'http://amazon.com/dp/'
 ISBNs = {
@@ -15,10 +17,11 @@ ISBNs = {
 }
 
 def getRanking(isbn):
-    page = uopen('%s%s' % (AMZN, isbn))
-    data = page.read()
-    page.close()
-    return REGEX.findall(data.decode())[0]
+    with lock:
+        page = uopen('%s%s' % (AMZN, isbn))
+        data = page.read()
+        page.close()
+        return REGEX.findall(data.decode())[0]
 
 
 def _showRanking(isbn):
