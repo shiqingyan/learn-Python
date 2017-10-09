@@ -1,5 +1,7 @@
 #！/usr/bin/env python3
-import urllib.request, urllib.error, urllib.parse
+import urllib.request
+import urllib.error
+import urllib.parse
 
 LOGIN = '18273309804'
 PASSWD = '19970202ysq'
@@ -29,3 +31,4 @@ for funcType in ('handler', 'request'):
     f = urllib.request.urlopen(url)
     print(str(f.read(), 'utf-8'))
     f.close()
+    
