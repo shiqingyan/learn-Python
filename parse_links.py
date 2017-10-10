@@ -29,6 +29,9 @@ def fasterBS(url, f):
 
 def htmlparser(url, f):
     class AnchorParser(HTMLParser):
+        def __init__(self):
+            HTMLParser.__init__(self)
+            self.data = []
 
         def handle_startendtag(self, tag, attrs):
             if tag != 'a':
